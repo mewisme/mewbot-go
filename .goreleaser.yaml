@@ -23,9 +23,9 @@ builds:
       - arm64
     ldflags:
       - -s -w
-      - -X main.version={{.Version}}
-      - -X main.commit={{.Commit}}
-      - -X main.date={{.Date}}
+      - -X github.com/mewisme/mewbot-go/cmd/mewbot.version={{.Version}}
+      - -X github.com/mewisme/mewbot-go/cmd/mewbot.commit={{.Commit}}
+      - -X github.com/mewisme/mewbot-go/cmd/mewbot.date={{.Date}}
 
 archives:
   - id: mewbot
