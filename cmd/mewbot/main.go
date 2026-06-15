@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	logger.Info("mewbot %s (commit %s, built %s)", buildVersion(), buildCommit(), buildDate())
+	logger.Info("mewbot %s", buildVersion())
 
 	cfg, err := config.Load()
 	if err != nil {
