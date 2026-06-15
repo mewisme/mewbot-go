@@ -16,14 +16,8 @@ import (
 	"github.com/mewisme/mewbot-go/internal/registry"
 )
 
-var (
-	version = "dev"
-	commit  = "none"
-	date    = "unknown"
-)
-
 func main() {
-	logger.Info("mewbot %s (commit %s, built %s)", version, commit, date)
+	logger.Info("mewbot %s (commit %s, built %s)", buildVersion(), buildCommit(), buildDate())
 
 	cfg, err := config.Load()
 	if err != nil {
