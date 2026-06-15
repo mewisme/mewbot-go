@@ -1,0 +1,11 @@
+{
+  "perm": {
+    "help": {
+      "all": [
+        "member"
+      ],
+      "users": [],
+      "children": {}
+    }
+  }
+}
