@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+const modulePath = "github.com/mewisme/mewbot-go"
+
 var (
 	version = "dev"
 	commit  = "none"
@@ -19,7 +21,7 @@ func buildVersion() string {
 	if !ok {
 		return version
 	}
-	if v := info.Main.Version; v != "" && v != "(devel)" {
+	if v := moduleVersion(info); v != "" {
 		return v
 	}
 	return version
@@ -46,6 +48,33 @@ func buildDate() string {
 		return v
 	}
 	return date
+}
+
+func moduleVersion(info *debug.BuildInfo) string {
+	if info.Main.Path == modulePath {
+		if v := normalizeVersion(info.Main.Version); v != "" {
+			return v
+		}
+	}
+	for _, dep := range info.Deps {
+		if dep.Path == modulePath {
+			if v := normalizeVersion(dep.Version); v != "" {
+				return v
+			}
+		}
+	}
+	return ""
+}
+
+func normalizeVersion(v string) string {
+	v = strings.TrimSpace(v)
+	if v == "" || v == "(devel)" {
+		return ""
+	}
+	if i := strings.IndexByte(v, '+'); i >= 0 {
+		v = v[:i]
+	}
+	return v
 }
 
 func vcsSetting(key string) string {
